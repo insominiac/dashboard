@@ -29,11 +29,8 @@ var messagesRef = firebase.database()
         else{console.log("No Response from server")}
     }
   }
-document.getElementById('botform')
-    .addEventListener('submit',submitForm);
-
     
-function submitForm(e) {
+const submitForm = async (e) => {
     e.preventDefault();
 
     // Get values
@@ -70,14 +67,21 @@ function submitForm(e) {
   }, 3000);
     document.getElementById('botform').reset();
    // console.log(name,des,downloadURL)
-   const http = new XMLHttpRequest()
 
-   http.open("GET", "https://gitlab-service.onrender.com")
-   http.send()
-   
-   http.onload = () => console.log(http.responseText)
+   const response = await fetch('https://gitlab-service.onrender.com', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        if(response.ok){
+          console.log(response)
+        }
+        else{console.log("No Response from server")} 
 }
 
+document.getElementById('botform')
+    .addEventListener('submit',submitForm);
 
 
 // Function to get form values
