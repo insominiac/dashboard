@@ -67,9 +67,11 @@ const submitForm = async (e) => {
   }, 3000);
     document.getElementById('botform').reset();
    // console.log(name,des,downloadURL)
+  
 
    const response = await fetch('https://gitlab-service.onrender.com', {
             method: 'GET',
+            mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/json',
             }
