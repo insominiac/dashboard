@@ -12,19 +12,55 @@ firebase.initializeApp(firebaseConfig);
 
 var messagesRef = firebase.database()
     .ref('botform');
- 
+    
+    function handleSubmit(){ async (e) => {
+      console.log('hhh')
+      e.preventDefault()
+    
+      const response = await fetch('https://gitlab-service.onrender.com', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        if(response.ok){
+          console.log(response)
+        }
+        else{console.log("No Response from server")}
+    }
+  }
 document.getElementById('botform')
-    .addEventListener('submit', submitForm);
+    .addEventListener('submit',submitForm);
 
+    
 function submitForm(e) {
     e.preventDefault();
 
     // Get values
     var name = getInputVal('botName');
     var des = getInputVal('botDes');
-    var engine = getInputVal('engine');
+    var type = getInputVal('types');
+    var storage = firebase.storage();
+    var file=document.getElementById("files").files[0];
+    var storageref=storage.ref();
+    var thisref=storageref.child(type).child(file.name).put(file);
+    thisref.on('state_changed',function(snapshot) {
+   
+   
+    }, function(error) {
+    
+   }, function() {
+    // Uploaded completed successfully, now we can get the download URL
+    thisref.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+      //getting url of image
+      document.getElementById("url").value=downloadURL;
+    //  alert('uploaded successfully');
+     saveMessages(name,des,downloadURL);
+     });
+    });
+    var url = getInputVal('url');
 
-    saveMessages(name, des,engine);
+   // saveMessages(name,des);
     //   enable alert
   document.querySelector(".alert").style.display = "block";
 
@@ -33,8 +69,16 @@ function submitForm(e) {
     document.querySelector(".alert").style.display = "none";
   }, 3000);
     document.getElementById('botform').reset();
-    console.log(name,des,engine)
+   // console.log(name,des,downloadURL)
+   const http = new XMLHttpRequest()
+
+   http.open("GET", "https://gitlab-service.onrender.com")
+   http.send()
+   
+   http.onload = () => console.log(http.responseText)
 }
+
+
 
 // Function to get form values
 function getInputVal(id) {
@@ -42,16 +86,19 @@ function getInputVal(id) {
 }
 
 // Save message to firebase
-const saveMessages = (name, des,engine) => {
+const saveMessages = (name,des,downloadURL) => {
     var newContactForm = messagesRef.push();
   
     newContactForm.set({
       name: name,
       description: des,
-      ChatEngine: engine,
+      imageurl:downloadURL,
      // msgContent: msgContent,
     });
   };
+
+  
+  //Reading database
   var database = firebase.database();
 
   database.ref('botform').once('value', function(snapshot) {
@@ -59,11 +106,11 @@ const saveMessages = (name, des,engine) => {
       var content = '';
       snapshot.forEach(function(data) {
         var val = data.val();
-        content += '<tr>';
-        content += '<td>' + val.name + '</td>';
-        content += '<td>' + val.description + '</td>';
-        content += '<td>' + val.ChatEngine + '</td>';
-        content += '</tr>';
+       // content += '<tr>';
+      //  content += '<td>' + val.name + '</td>';
+       // content += '<td>' + val.description + '</td>';
+        content += `<tr><td><a href="https://bot-six-delta.vercel.app/${val.name.toLowerCase()}.html" target="_blank">${val.name}</a></td><td>${val.description}</td><td><a href=${val.imageurl} target="_blank"><img src=${val.imageurl} width="30" height="30"></img></a></td></tr>`;
+      //  content += '</tr>';
       });
       $('#bot-table').append(content);
     }
