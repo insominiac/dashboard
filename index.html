@@ -159,7 +159,7 @@
               </div>
             </div>
             <div class="col-sm-6">
-              <button class="w-100 my-4 btn btn-primary btn-lg" type="submit">Create Bot</button>
+              <button class="w-100 my-4 btn btn-primary btn-lg" type="submit" onclick="handleSubmi()">Create Bot</button>
             </div>
           </div>
         
@@ -190,7 +190,7 @@ const handleSubmi = async (e) => {
   
   console.log("Hello");
   const token ='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'
-  fetch(url, {
+ await fetch(url, {
     method:'PUT',
     mode: "cors",
     headers: {
@@ -199,7 +199,9 @@ const handleSubmi = async (e) => {
    },
    url:'https://api.github.com/repos/insominiac/bot/contents/hellowrold.html',
     content: 'bXkgbmV3IGZpbGUgY29udGVudHM='
-  })
+  }).then(function(){
+    console.log("sucess")
+  });
 }
 </script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
