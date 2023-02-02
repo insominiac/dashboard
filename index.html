@@ -15,6 +15,9 @@
             integrity=
     "sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
             crossorigin="anonymous">
+            <script src="https://cdn.skypack.dev/@octokit/rest">
+              import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
+            </script>
     <title>Creat AI Chat Bot</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
@@ -135,6 +138,13 @@
                 Bot Description is required.
               </div>
             </div>
+            <div class="col-sm-6">
+              <label for="botname" class="form-label">Set Prompt</label>
+              <textarea class="form-control" id="botprompt" placeholder="Bot Prompt" value="" required=""></textarea>
+              <div class="invalid-feedback">
+                Bot Prompt is required.
+              </div>
+            </div>
             <div class="col-md-6">
               <label for="state" class="form-label">Add Image for Bot</label>
               <select class="form-control " id="types" hidden>
@@ -149,7 +159,7 @@
               </div>
             </div>
             <div class="col-sm-6">
-              <button class="w-100 my-4 btn btn-primary btn-lg" type="submit">Create Bot</button>
+              <button class="w-100 my-4 btn btn-primary btn-lg" type="submit" onclick="handleSubmi()">Create Bot</button>
             </div>
           </div>
         
@@ -163,6 +173,7 @@
               <th scope="col">Bot Name</th>
               <th scope="col">Bot Description</th>
               <th scope="col">Bot Image</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -173,8 +184,24 @@
     </main>
   </div>
 </div>
-
-
+<script>
+ 
+const handleSubmi = async (e) => { 
+  
+  console.log("Hello");
+  const token ='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'
+  fetch(url, {
+    method:'PUT',
+    mode: "cors",
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+   },
+   url:'https://api.github.com/repos/insominiac/bot/contents/hellowrold.html',
+    content: 'bXkgbmV3IGZpbGUgY29udGVudHM='
+  })
+}
+</script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>

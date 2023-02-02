@@ -1,3 +1,4 @@
+
 var firebaseConfig = {
      apiKey: "AIzaSyArIyFKvHKgy5ZJWFeuDJyLpqd1GApsrrY",
   authDomain: "chatbot-ca9b4.firebaseapp.com",
@@ -12,24 +13,7 @@ firebase.initializeApp(firebaseConfig);
 
 var messagesRef = firebase.database()
     .ref('botform');
-    
-    function handleSubmit(){ async (e) => {
-      console.log('hhh')
-      e.preventDefault()
-    
-      const response = await fetch('https://gitlab-service.onrender.com', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        if(response.ok){
-          console.log(response)
-        }
-        else{console.log("No Response from server")}
-    }
-  }
-    
+
 const submitForm = async (e) => {
     e.preventDefault();
 
@@ -37,6 +21,7 @@ const submitForm = async (e) => {
     var name = getInputVal('botName');
     var des = getInputVal('botDes');
     var type = getInputVal('types');
+    var prompt = getInputVal('botprompt')
     var storage = firebase.storage();
     var file=document.getElementById("files").files[0];
     var storageref=storage.ref();
@@ -52,7 +37,7 @@ const submitForm = async (e) => {
       //getting url of image
       document.getElementById("url").value=downloadURL;
     //  alert('uploaded successfully');
-     saveMessages(name,des,downloadURL);
+     saveMessages(name,des,prompt,downloadURL);
      });
     });
     var url = getInputVal('url');
@@ -67,20 +52,7 @@ const submitForm = async (e) => {
   }, 3000);
     document.getElementById('botform').reset();
    // console.log(name,des,downloadURL)
-  
-
-   const response = await fetch('https://gitlab-service.onrender.com', {
-            method: 'GET',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        if(response.ok){
-          console.log(response)
-        }
-        else{console.log("No Response from server")} 
-}
+      }
 
 document.getElementById('botform')
     .addEventListener('submit',submitForm);
@@ -92,13 +64,14 @@ function getInputVal(id) {
 }
 
 // Save message to firebase
-const saveMessages = (name,des,downloadURL) => {
+const saveMessages = (name,des,prompt,downloadURL) => {
     var newContactForm = messagesRef.push();
   
     newContactForm.set({
       name: name,
       description: des,
       imageurl:downloadURL,
+      prompt:prompt,
      // msgContent: msgContent,
     });
   };
@@ -107,18 +80,29 @@ const saveMessages = (name,des,downloadURL) => {
   //Reading database
   var database = firebase.database();
 
-  database.ref('botform').once('value', function(snapshot) {
+  database.ref().child('botform').once('value', function(snapshot) {
     if (snapshot.exists()) {
+
       var content = '';
-      snapshot.forEach(function(data) {
-        var val = data.val();
+
+      snapshot.forEach(function(child) {
+
+        var val = child.val();
+       // const dbref = database.ref("/botform/" + child.key);
+        const ikey = child.key;
+      //  dbref.remove();
+       // console.log(dbref)
+          //key.remove()
+      
+       // console.log(key)
        // content += '<tr>';
       //  content += '<td>' + val.name + '</td>';
        // content += '<td>' + val.description + '</td>';
-        content += `<tr><td><a href="https://bot-six-delta.vercel.app/${val.name.toLowerCase()}.html" target="_blank">${val.name}</a></td><td>${val.description}</td><td><a href=${val.imageurl} target="_blank"><img src=${val.imageurl} width="30" height="30"></img></a></td></tr>`;
+        content += `<tr><td><a href="https://bot-six-delta.vercel.app/${val.name.toLowerCase()}.html" target="_blank">${val.name}</a></td><td>${val.description}</td><td><a href=${val.imageurl} target="_blank"><img src=${val.imageurl} width="30" height="30"></img></a><td><button class="w-100 my-2 btn btn-primary btn btn-sm" onclick="function myFunction(){const keyref=database.ref('/botform/' + '${ikey}');keyref.remove();this.hide()} myFunction();">Delete</button></td></tr>`;
       //  content += '</tr>';
       });
+  
       $('#bot-table').append(content);
     }
-  });
-
+  
+});
