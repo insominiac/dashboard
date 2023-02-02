@@ -15,10 +15,8 @@
             integrity=
     "sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
             crossorigin="anonymous">
-            <script src="https://cdn.skypack.dev/@octokit/rest">
-              import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
-            </script>
-    <title>Creat AI Chat Bot</title>
+          
+    <title>Create AI Chat Bot</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
 
@@ -191,23 +189,7 @@ const handleSubmi = async (e) => {
   console.log("Hello");
   const token ='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'
   var content = 'Hello encode'
-  var encodedString = btoa(content);
-  var data = JSON.stringify({
-    "message": `${encodedString}`,
-    "content": `${encodedString}`
-  })
- await fetch(url, {
-    method:'PUT',
-    mode: "cors",
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-   },
-   url:'https://api.github.com/repos/insominiac/bot/contents/wrold.html',
-   data: data
-  }).then(function(){
-    console.log("sucess")
-  });
+  fetch('https://gitlab-service.onrender.com').then(function(res,err){if(res){console.log(res)}else{console.log("Err")}})
 }
 </script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
