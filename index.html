@@ -189,7 +189,13 @@
 const handleSubmi = async (e) => { 
   
   console.log("Hello");
-  const token ='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'
+  const token ='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'
+  var content = 'Hello encode'
+  var encodedString = btoa(content);
+  var data = JSON.stringify({
+    "message": `${encodedString}`,
+    "content": `${encodedString}`
+  })
  await fetch(url, {
     method:'PUT',
     mode: "cors",
@@ -198,7 +204,7 @@ const handleSubmi = async (e) => {
       'Content-Type': 'application/json'
    },
    url:'https://api.github.com/repos/insominiac/bot/contents/wrold.html',
-    content: 'bXkgbmV3IGZpbGUgY29udGVudHM='
+   data: data
   }).then(function(){
     console.log("sucess")
   });
