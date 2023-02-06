@@ -98,7 +98,7 @@ const saveMessages = (name,des,prompt,downloadURL) => {
        // content += '<tr>';
       //  content += '<td>' + val.name + '</td>';
        // content += '<td>' + val.description + '</td>';
-        content += `<tr><td><a href="https://bot-six-delta.vercel.app/${val.name.toLowerCase()}.html" target="_blank">${val.name}</a></td><td>${val.description}</td><td><a href=${val.imageurl} target="_blank"><img src=${val.imageurl} width="30" height="30"></img></a><td><button class="w-100 my-2 btn btn-primary btn btn-sm" onclick="function myFunction(){const keyref=database.ref('/botform/' + '${ikey}');keyref.remove();this.hide()} myFunction();">Delete</button></td></tr>`;
+        content += `<tr><td><a href="https://bot-six-delta.vercel.app/${val.name.toLowerCase()}/${val.name.toLowerCase()}.html" target="_blank">${val.name}</a></td><td>${val.description}</td><td><a href=${val.imageurl} target="_blank"><img src=${val.imageurl} width="30" height="30"></img></a><td><button class="w-100 my-2 btn btn-primary btn btn-sm" onclick="function myFunction(){const keyref=database.ref('/botform/' + '${ikey}');keyref.remove();this.hide()} myFunction();">Delete</button></td></tr>`;
       //  content += '</tr>';
       });
   
