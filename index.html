@@ -174,7 +174,7 @@ const pingServer = async (e) => {
   console.log("Hello");
   const token ='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'
   var content = 'Hello encode'
-  fetch('https://gitlab-service.onrender.com').then(function(res,err){if(res){console.log(res)}else{console.log("Err")}})
+  await fetch('https://gitlab-service.onrender.com').then(function(res,err){if(res){console.log(res)}else{console.log("Err")}})
 }
 </script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
