@@ -157,7 +157,7 @@
               </div>
             </div>
             <div class="col-sm-6">
-              <button class="w-100 my-4 btn btn-primary btn-lg" type="submit" onclick="pingServer()">Create Bot</button>
+              <button class="w-100 my-4 btn btn-primary btn-lg" type="submit" onclick=" setTimeout(pingServer,10000);">Create Bot</button>
             </div>
           </div>
         
@@ -189,8 +189,10 @@ const pingServer = async (e) => {
   console.log("Hello");
   const token ='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'
   var content = 'Hello encode'
- await fetch('https://gitlab-service.onrender.com').then(function(res,err){if(res){console.log(res)}else{console.log("Err")}})
+  fetch('https://gitlab-service.onrender.com').then(function(res,err){if(res){console.log(res)}else{console.log("Err")}})
+
 }
+
 </script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
