@@ -9,18 +9,14 @@
     <script src=
     "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
         </script>
-     
         <link rel="stylesheet" href=
     "https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
             integrity=
     "sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
             crossorigin="anonymous">
-          
     <title>Create AI Chat Bot</title>
-
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
-
-<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -73,15 +69,11 @@
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
       }
-
     </style>
-
-    
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
   </head>
   <body>
-    
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">AI ChatBot </a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,7 +86,6 @@
     </div>
   </div>
 </header>
-
 <div class="container-fluid">
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
@@ -110,7 +101,6 @@
         </ul>
       </div>
     </nav>
-
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Dashboard</h1>
@@ -157,10 +147,9 @@
               </div>
             </div>
             <div class="col-sm-6">
-              <button class="w-100 my-4 btn btn-primary btn-lg" type="submit" onclick="pingServer()">Create Bot</button>
+              <button class="w-100 my-4 btn btn-primary btn-lg" type="submit" onclick="setTimeout(pingServer,3000)">Create Bot</button>
             </div>
           </div>
-        
         </form>
       </div>
       <h2 class="my-4">Chatbots</h2>
@@ -175,7 +164,6 @@
             </tr>
           </thead>
           <tbody>
-          
           </tbody>
         </table>
       </div>
@@ -183,19 +171,14 @@
   </div>
 </div>
 <script>
- 
 const pingServer = async (e) => { 
-  
   console.log("Hello");
   const token ='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'
   var content = 'Hello encode'
   fetch('https://gitlab-service.onrender.com').then(function(res,err){if(res){console.log(res)}else{console.log("Err")}})
-
 }
-
 </script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js">
     </script>
