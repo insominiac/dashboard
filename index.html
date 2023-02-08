@@ -17,7 +17,6 @@
     "sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
             crossorigin="anonymous">
     <title>Create AI Chat Bot</title>
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
     
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -94,7 +93,7 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Status</h4>
+          <h4 class="modal-title">Status- Please Wait...</h4>
         </div>
         <div class="modal-body">
           <p>Please wait...</p>
@@ -163,12 +162,13 @@
               </div>
             </div>
             <div class="col-sm-6">
-              <button class="w-100 my-4 btn btn-primary btn-lg" type="submit" onclick="dialog()">Create Bot</button>
+              <button class="w-100 my-4 btn btn-primary btn-lg"  type="submit" onclick="dialog()">Create Bot</button>
             </div>
           </div>
         </form>
       </div>
-    
+     
+      
       <h2 class="my-4">Chatbots</h2>
       <div class="my-4 table-responsive">
         <table class="table table-striped table-sm" id="bot-table">
@@ -187,6 +187,7 @@
     </main>
   </div>
 </div>
+
 <script>
 const dialog = () => {
   if(!$('#botName').val()){
@@ -198,10 +199,14 @@ const dialog = () => {
   }else if(!$('#files').val()){
     alert('Bot Image is required');
   }else{
-  $('#myModal').modal('show');
-  $('.modal-body').append('<p>Chat Bot is Being Created</p>')
-  setTimeout(pingServer,60000);
+  $('#myModal').modal({backdrop:'static'});
+  $('.modal-body').text('Chat Bot is Being Created...')
+  setTimeout(pingServer,5000);
   }
+}
+const diagout =()=>{
+  $('#myModal').modal('hide');
+  $('.modal-body').text('Bot is Ready!');
 }
 const pingServer = async (e) => { 
   console.log("Hello");
@@ -211,18 +216,18 @@ const pingServer = async (e) => {
     function(res,err){
       if(res){
         console.log(res)
-        $('.modal-body').append('<p>Chat Bot is Ready!</p>')
-        $('#myModal').modal('hide');
+        $('.modal-body').text('Deplyoing Bot....')
+       
        // $('.fade').css({'opacity':'0 !important' });
-
       }else{
         console.log("Err")
       }
-     
+      setTimeout(diagout,30000);
     })
    }
+  
+
 </script>
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js">
     </script>
