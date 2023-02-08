@@ -16,7 +16,7 @@ var messagesRef = firebase.database()
 const submitForm = async (e) => {
     e.preventDefault();
     // Get values
-    var name = getInputVal('botName');
+    var name = getInputVal('botName').replace(/\s/g,'-').toLowerCase();
     var des = getInputVal('botDes');
     var type = getInputVal('types');
     var prompt = getInputVal('botprompt')
@@ -79,7 +79,7 @@ const saveMessages = (name,des,prompt,downloadURL) => {
   //Reading database
   var database = firebase.database();
 
-  database.ref().child('botform').on('value', function(snapshot) {
+  database.ref().child('botform').once('value', function(snapshot) {
     if (snapshot.exists()) {
 
       var content = '';
