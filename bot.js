@@ -44,11 +44,11 @@ const submitForm = async (e) => {
     //   enable alert
     setTimeout(() => {
   document.querySelector(".alert").style.display = "block";
-    }, 45000);
+    }, 60000);
   //   remove the alert
   setTimeout(() => {
     document.querySelector(".alert").style.display = "none";
-  }, 46000);
+  }, 61000);
     document.getElementById('botform').reset();
    // console.log(name,des,downloadURL)
       }
