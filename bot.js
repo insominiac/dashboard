@@ -78,8 +78,8 @@ const saveMessages = (name,des,prompt,downloadURL) => {
   
   //Reading database
   var database = firebase.database();
-
-  database.ref().child('botform').once('value', function(snapshot) {
+  var fkey = ''
+  database.ref().child('botform').on('value', function(snapshot) {
     if (snapshot.exists()) {
 
       var content = '';
@@ -89,6 +89,8 @@ const saveMessages = (name,des,prompt,downloadURL) => {
         var val = child.val();
        // const dbref = database.ref("/botform/" + child.key);
         const ikey = child.key;
+        fkey = ikey;
+
       //  dbref.remove();
        // console.log(dbref)
           //key.remove()
@@ -100,6 +102,8 @@ const saveMessages = (name,des,prompt,downloadURL) => {
         content += `<tr id='${ikey}'><td><a href="https://bot-six-delta.vercel.app/${val.name.toLowerCase()}/${val.name.toLowerCase()}.html" target="_blank">${val.name}</a></td><td>${val.description}</td><td><a href=${val.imageurl} target="_blank"><img src=${val.imageurl} width="30" height="30"></img></a><td><button class="w-100 my-2 btn btn-primary btn btn-sm" onclick="function myFunction(){const keyref=database.ref('/botform/' + '${ikey}');keyref.remove();this.hide()} myFunction();">Delete</button></td></tr>`;
       //  content += '</tr>';
       });
+      console.log(fkey)
+      database.ref().child('/botform/' + fkey).update({fkey:fkey})
   
       $('#bot-table').append(content);
     }
